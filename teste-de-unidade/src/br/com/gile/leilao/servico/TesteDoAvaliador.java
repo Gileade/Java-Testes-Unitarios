@@ -22,9 +22,12 @@ public class TesteDoAvaliador {
 		Avaliador leiloeiro = new Avaliador();
 		leiloeiro.avalia(leilao);
 		
-		//exibindo a saída
-		System.out.println(leiloeiro.getMaiorLance());//Deve imprimir 400
-		System.out.println(leiloeiro.getMenorLance());//Deve imprimir 250
+		//comparando a saída com o esperado
+		double maiorEsperado = 400;
+		double menorEsperado = 250;
+		
+		System.out.println(maiorEsperado == leiloeiro.getMaiorLance());//Deve imprimir 400
+		System.out.println(menorEsperado == leiloeiro.getMenorLance());//Deve imprimir 250
 	}
 
 }
