@@ -5,7 +5,7 @@ import br.com.gile.leilao.dominio.Leilao;
 
 public class Avaliador {
 
-	private double maiorDeTodos;
+	private double maiorDeTodos = Double.NEGATIVE_INFINITY;
 
 	public void avalia(Leilao leilao) {
 		for(Lance lance: leilao.getLances()) {
