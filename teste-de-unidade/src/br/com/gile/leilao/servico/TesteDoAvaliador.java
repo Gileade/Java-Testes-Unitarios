@@ -1,12 +1,16 @@
 package br.com.gile.leilao.servico;
 
+import org.junit.Test;
+
 import br.com.gile.leilao.dominio.Lance;
 import br.com.gile.leilao.dominio.Leilao;
 import br.com.gile.leilao.dominio.Usuario;
+import junit.framework.Assert;
 
 public class TesteDoAvaliador {
 
-	public static void main(String[] args) {
+	@Test
+	public void main() {
 		//Cenário: 3 lances em ordem crescente
 		Usuario joao = new Usuario("João");
 		Usuario jose = new Usuario("José");
@@ -26,8 +30,8 @@ public class TesteDoAvaliador {
 		double maiorEsperado = 400;
 		double menorEsperado = 250;
 		
-		System.out.println(maiorEsperado == leiloeiro.getMaiorLance());//Deve imprimir 400
-		System.out.println(menorEsperado == leiloeiro.getMenorLance());//Deve imprimir 250
+		Assert.assertEquals(maiorEsperado, leiloeiro.getMaiorLance(),0.00001);//Deve imprimir 400
+		Assert.assertEquals(menorEsperado, leiloeiro.getMenorLance(),0.00001);//Deve imprimir 250
 	}
 
 }
