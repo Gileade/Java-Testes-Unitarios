@@ -1,16 +1,16 @@
 package br.com.gile.leilao.servico;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import br.com.gile.leilao.dominio.Lance;
 import br.com.gile.leilao.dominio.Leilao;
 import br.com.gile.leilao.dominio.Usuario;
-import junit.framework.Assert;
 
 public class TesteDoAvaliador {
 
 	@Test
-	public void main() {
+	public void deveEntenderLancesEmOrdemCrescente() {
 		//Cenário: 3 lances em ordem crescente
 		Usuario joao = new Usuario("João");
 		Usuario jose = new Usuario("José");
