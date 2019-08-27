@@ -1,5 +1,7 @@
 package br.com.gile.leilao.servico;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -30,8 +32,8 @@ public class TesteDoAvaliador {
 		double maiorEsperado = 400;
 		double menorEsperado = 250;
 
-		Assert.assertEquals(maiorEsperado, leiloeiro.getMaiorLance(), 0.00001);// Deve imprimir 400
-		Assert.assertEquals(menorEsperado, leiloeiro.getMenorLance(), 0.00001);// Deve imprimir 250
+		assertEquals(maiorEsperado, leiloeiro.getMaiorLance(), 0.00001);// Deve imprimir 400
+		assertEquals(menorEsperado, leiloeiro.getMenorLance(), 0.00001);// Deve imprimir 250
 	}
 
 	@Test
@@ -51,7 +53,7 @@ public class TesteDoAvaliador {
 		Avaliador leiloeiro = new Avaliador();
 		leiloeiro.avalia(leilao);
 
-		Assert.assertEquals(400, leiloeiro.getMedia(), 0.00001);// Deve imprimir 250
+		assertEquals(400, leiloeiro.getMedia(), 0.00001);// Deve imprimir 250
 	}
 
 	@Test
@@ -67,7 +69,7 @@ public class TesteDoAvaliador {
 		Avaliador leiloeiro = new Avaliador();
 		leiloeiro.avalia(leilao);
 
-		Assert.assertEquals(0, leiloeiro.getMedia(), 0.00001);// Deve imprimir 250
+		assertEquals(0, leiloeiro.getMedia(), 0.00001);// Deve imprimir 250
 
 	}
 
@@ -84,9 +86,53 @@ public class TesteDoAvaliador {
 		Avaliador leiloeiro = new Avaliador();
 		leiloeiro.avalia(leilao);
 
-		Assert.assertEquals(200, leiloeiro.getMaiorLance(), 0.00001);// Deve imprimir 200
-		Assert.assertEquals(200, leiloeiro.getMenorLance(), 0.00001);// Deve imprimir 200
-		Assert.assertEquals(200, leiloeiro.getMedia(), 0.00001);// Deve imprimir 200
+		assertEquals(200, leiloeiro.getMaiorLance(), 0.00001);// Deve imprimir 200
+		assertEquals(200, leiloeiro.getMenorLance(), 0.00001);// Deve imprimir 200
+		assertEquals(200, leiloeiro.getMedia(), 0.00001);// Deve imprimir 200
+	}
+
+	@Test
+	public void deveEntenderLancesEmOrdemAleatoria() {
+		// Cenário: 3 lances em ordem crescente
+		Usuario joao = new Usuario("João");
+		Usuario jose = new Usuario("José");
+		Usuario maria = new Usuario("Maria");
+
+		Leilao leilao = new Leilao("Playstation 3 novo");
+
+		leilao.propoe(new Lance(joao, 8000.0));
+		leilao.propoe(new Lance(jose, 5000.0));
+		leilao.propoe(new Lance(maria, 6800.0));
+		leilao.propoe(new Lance(jose, 9000.0));
+		leilao.propoe(new Lance(joao, 3200.0));
+
+		// executando a ação
+		Avaliador leiloeiro = new Avaliador();
+		leiloeiro.avalia(leilao);
+
+		assertEquals(9000, leiloeiro.getMaiorLance(), 0.00001);
+		assertEquals(3200, leiloeiro.getMenorLance(), 0.00001);
+	}
+
+	@Test
+	public void deveEntenderLancesEmOrdemDecrescente() {
+		// Cenário: 3 lances em ordem crescente
+		Usuario joao = new Usuario("João");
+		Usuario jose = new Usuario("José");
+		Usuario maria = new Usuario("Maria");
+
+		Leilao leilao = new Leilao("Playstation 3 novo");
+
+		leilao.propoe(new Lance(joao, 8000.0));
+		leilao.propoe(new Lance(jose, 7000.0));
+		leilao.propoe(new Lance(maria, 6000.0));
+
+		// executando a ação
+		Avaliador leiloeiro = new Avaliador();
+		leiloeiro.avalia(leilao);
+
+		assertEquals(8000, leiloeiro.getMaiorLance(), 0.00001);
+		assertEquals(6000, leiloeiro.getMenorLance(), 0.00001);
 	}
 
 }
