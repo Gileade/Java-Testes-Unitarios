@@ -62,13 +62,31 @@ public class TesteDoAvaliador {
 		Leilao leilao = new Leilao("Playstation 3 novo");
 
 		leilao.propoe(new Lance(joao, 0));
-		
+
 		// executando a ação
 		Avaliador leiloeiro = new Avaliador();
 		leiloeiro.avalia(leilao);
 
 		Assert.assertEquals(0, leiloeiro.getMedia(), 0.00001);// Deve imprimir 250
 
+	}
+
+	@Test
+	public void deveEntenderApenasUmLance() {
+		// Cenário: 3 lances em ordem crescente
+		Usuario joao = new Usuario("João");
+
+		Leilao leilao = new Leilao("Playstation 3 novo");
+
+		leilao.propoe(new Lance(joao, 200));
+
+		// executando a ação
+		Avaliador leiloeiro = new Avaliador();
+		leiloeiro.avalia(leilao);
+
+		Assert.assertEquals(200, leiloeiro.getMaiorLance(), 0.00001);// Deve imprimir 200
+		Assert.assertEquals(200, leiloeiro.getMenorLance(), 0.00001);// Deve imprimir 200
+		Assert.assertEquals(200, leiloeiro.getMedia(), 0.00001);// Deve imprimir 200
 	}
 
 }
