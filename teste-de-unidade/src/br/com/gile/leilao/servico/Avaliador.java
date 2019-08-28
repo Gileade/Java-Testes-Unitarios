@@ -23,14 +23,14 @@ public class Avaliador {
 			total+=lance.getValor();
 		}
 		
+		pegaOsMaioresNo(leilao);
+		
 		if(total == 0) {
 			media = 0;
 			return;
 		}
 		
 		media = total /leilao.getLances().size();
-		
-		pegaOsMaioresNo(leilao);
 	}
 	
 	private void pegaOsMaioresNo(Leilao leilao) {
