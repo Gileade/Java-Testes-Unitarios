@@ -1,4 +1,4 @@
-package br.com.gile.leilao.servico;
+package br.com.gile.leilao.testes;
 
 import static org.junit.Assert.assertEquals;
 
@@ -10,6 +10,7 @@ import org.junit.Test;
 import br.com.gile.leilao.dominio.Lance;
 import br.com.gile.leilao.dominio.Leilao;
 import br.com.gile.leilao.dominio.Usuario;
+import br.com.gile.leilao.servico.Avaliador;
 
 public class TesteDoAvaliador {
 
