@@ -2,6 +2,8 @@ package br.com.gile.leilao.servico;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -133,6 +135,33 @@ public class TesteDoAvaliador {
 
 		assertEquals(8000, leiloeiro.getMaiorLance(), 0.00001);
 		assertEquals(6000, leiloeiro.getMenorLance(), 0.00001);
+	}
+	
+	@Test
+	public void deveEncontrarOsTresMaioresLances() {
+		// Cenário: 3 lances em ordem crescente
+		Usuario joao = new Usuario("João");
+		Usuario jose = new Usuario("José");
+		Usuario maria = new Usuario("Maria");
+
+		Leilao leilao = new Leilao("Playstation 3 novo");
+
+		leilao.propoe(new Lance(joao, 8000.0));
+		leilao.propoe(new Lance(jose, 7000.0));
+		leilao.propoe(new Lance(maria, 6000.0));
+		leilao.propoe(new Lance(joao, 7500.0));
+		leilao.propoe(new Lance(jose, 4500.0));
+		
+		// executando a ação
+		Avaliador leiloeiro = new Avaliador();
+		leiloeiro.avalia(leilao);
+
+		List<Lance> maiores = leiloeiro.getTresMaiores();
+		
+		assertEquals(3, maiores.size());
+		assertEquals(8000, maiores.get(0).getValor(), 0.00001);
+		assertEquals(7500, maiores.get(1).getValor(), 0.00001);
+		assertEquals(7000, maiores.get(2).getValor(),0.00001);
 	}
 
 }
