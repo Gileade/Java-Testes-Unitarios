@@ -11,7 +11,7 @@ import br.com.gile.leilao.dominio.FiltroDeLances;
 import br.com.gile.leilao.dominio.Lance;
 import br.com.gile.leilao.dominio.Usuario;
 
-public class TesteFiltroDeLance {
+public class FiltroDeLanceTest {
 
     @Test
     public void deveSelecionarLancesEntre1000E3000() {

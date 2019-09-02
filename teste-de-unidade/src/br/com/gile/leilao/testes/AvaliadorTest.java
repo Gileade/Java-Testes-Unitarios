@@ -12,7 +12,7 @@ import br.com.gile.leilao.dominio.Leilao;
 import br.com.gile.leilao.dominio.Usuario;
 import br.com.gile.leilao.servico.Avaliador;
 
-public class TesteDoAvaliador {
+public class AvaliadorTest {
 
 	@Test
 	public void deveEntenderLancesEmOrdemCrescente() {

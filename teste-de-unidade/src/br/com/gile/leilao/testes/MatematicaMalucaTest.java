@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import br.com.gile.leilao.matematica.MatematicaMaluca;
 
-public class TesteMatematicaMaluca {
+public class MatematicaMalucaTest {
 
 	@Test
 	public void deveRetornarNumeroMaioresQue30() {
