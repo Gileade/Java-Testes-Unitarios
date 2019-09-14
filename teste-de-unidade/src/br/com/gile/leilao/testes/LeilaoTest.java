@@ -22,6 +22,19 @@ public class LeilaoTest {
 	}
 	
 	@Test
+	public void deveReceberVariosLances() {
+		Leilao leilao = new Leilao("Macbook Pro 15");
+		
+		leilao.propoe(new Lance(new Usuario("Gile"), 2000));
+		leilao.propoe(new Lance(new Usuario("Steve"), 2500));
+		leilao.propoe(new Lance(new Usuario("Wonder"), 3000));
+		
+		assertEquals(2000, leilao.getLances().get(0).getValor(), 0.00001);
+		assertEquals(2500, leilao.getLances().get(1).getValor(), 0.00001);
+		assertEquals(3000, leilao.getLances().get(2).getValor(), 0.00001);
+	}
+	
+	@Test
 	public void naoDeveAceitarDoisLancesEmSequenciaDoMesmoUsuario() {
 		Usuario gile = new Usuario("Gile");
 		
