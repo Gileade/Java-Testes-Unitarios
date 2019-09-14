@@ -11,7 +11,16 @@ import br.com.gile.leilao.dominio.Usuario;
 import br.com.gile.leilao.servico.Avaliador;
 
 public class LeilaoTest {
-
+	
+	@Test
+	public void deveReceberUmLance() {
+		Leilao leilao = new Leilao("Macbook Pro 15");
+		
+		leilao.propoe(new Lance(new Usuario("Steve Jobs"), 2000));
+		
+		assertEquals(2000, leilao.getLances().get(0).getValor(), 0.00001);
+	}
+	
 	@Test
 	public void naoDeveAceitarDoisLancesEmSequenciaDoMesmoUsuario() {
 		Usuario gile = new Usuario("Gile");
