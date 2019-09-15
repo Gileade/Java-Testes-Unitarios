@@ -77,4 +77,22 @@ public class LeilaoTest {
 		int ultimo = leilao.getLances().size()-1;
 		assertEquals(10000, leilao.getLances().get(ultimo).getValor(),0.00001);
 	}
+	
+	@Test
+	public void deveDobrarOUltimoLanceDado() {
+		Usuario gile = new Usuario("Gile");
+		Usuario steve = new Usuario("Steve");
+		
+		Leilao leilao = new Leilao("Playstation 4");
+		
+		leilao.propoe(new Lance(gile, 2000));
+		leilao.propoe(new Lance(steve, 3000));
+		
+		leilao.dobraLance(gile);
+		
+		assertEquals(4000, leilao.getLances().get(2).getValor(),0.00001);
+	}
+	
+	
+
 }
