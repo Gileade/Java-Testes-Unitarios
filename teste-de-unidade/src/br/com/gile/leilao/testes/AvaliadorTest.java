@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.com.gile.leilao.builder.CriadorDeLeilao;
 import br.com.gile.leilao.dominio.Lance;
 import br.com.gile.leilao.dominio.Leilao;
 import br.com.gile.leilao.dominio.Usuario;
@@ -31,12 +32,12 @@ public class AvaliadorTest {
 	@Test
 	public void deveEntenderLancesEmOrdemCrescente() {
 		// Cenário: 3 lances em ordem crescente
-		Leilao leilao = new Leilao("Playstation 3 novo");
-
-		leilao.propoe(new Lance(joao, 250.0));
-		leilao.propoe(new Lance(jose, 300.0));
-		leilao.propoe(new Lance(maria, 400.0));
-
+		Leilao leilao = new CriadorDeLeilao()
+				.para("Playstation3 novo")
+				.lance(joao,250.0)
+				.lance(jose,300.0)
+				.lance(maria, 400.0)
+				.constroi();
 		// executando a ação
 		leiloeiro.avalia(leilao);
 
