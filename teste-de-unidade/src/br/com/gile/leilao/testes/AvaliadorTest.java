@@ -15,19 +15,22 @@ import br.com.gile.leilao.servico.Avaliador;
 public class AvaliadorTest {
 
 	private Avaliador leiloeiro;
+	private Usuario jose;
+	private Usuario maria;
+	private Usuario joao;
 
 	@Before
 	public void setUp() {
 		this.leiloeiro = new Avaliador();
+		
+		this.joao = new Usuario("João");
+		this.jose = new Usuario("José");
+		this.maria = new Usuario("Maria");
 	}
 	
 	@Test
 	public void deveEntenderLancesEmOrdemCrescente() {
 		// Cenário: 3 lances em ordem crescente
-		Usuario joao = new Usuario("João");
-		Usuario jose = new Usuario("José");
-		Usuario maria = new Usuario("Maria");
-
 		Leilao leilao = new Leilao("Playstation 3 novo");
 
 		leilao.propoe(new Lance(joao, 250.0));
@@ -48,10 +51,6 @@ public class AvaliadorTest {
 	@Test
 	public void deveCalcularAMedia() {
 		// Cenário: 3 lances em ordem crescente
-		Usuario joao = new Usuario("João");
-		Usuario jose = new Usuario("José");
-		Usuario maria = new Usuario("Maria");
-
 		Leilao leilao = new Leilao("Playstation 3 novo");
 
 		leilao.propoe(new Lance(joao, 300));
@@ -67,8 +66,6 @@ public class AvaliadorTest {
 	@Test
 	public void testaZeroDeMedia() {
 		// Cenário: 3 lances em ordem crescente
-		Usuario joao = new Usuario("João");
-
 		Leilao leilao = new Leilao("Playstation 3 novo");
 
 		leilao.propoe(new Lance(joao, 0));
@@ -83,8 +80,6 @@ public class AvaliadorTest {
 	@Test
 	public void deveEntenderApenasUmLance() {
 		// Cenário: 3 lances em ordem crescente
-		Usuario joao = new Usuario("João");
-
 		Leilao leilao = new Leilao("Playstation 3 novo");
 
 		leilao.propoe(new Lance(joao, 200));
@@ -100,10 +95,6 @@ public class AvaliadorTest {
 	@Test
 	public void deveEntenderLancesEmOrdemAleatoria() {
 		// Cenário: 3 lances em ordem crescente
-		Usuario joao = new Usuario("João");
-		Usuario jose = new Usuario("José");
-		Usuario maria = new Usuario("Maria");
-
 		Leilao leilao = new Leilao("Playstation 3 novo");
 
 		leilao.propoe(new Lance(joao, 8000.0));
@@ -122,10 +113,6 @@ public class AvaliadorTest {
 	@Test
 	public void deveEntenderLancesEmOrdemDecrescente() {
 		// Cenário: 3 lances em ordem crescente
-		Usuario joao = new Usuario("João");
-		Usuario jose = new Usuario("José");
-		Usuario maria = new Usuario("Maria");
-
 		Leilao leilao = new Leilao("Playstation 3 novo");
 
 		leilao.propoe(new Lance(joao, 8000.0));
@@ -142,10 +129,6 @@ public class AvaliadorTest {
 	@Test
 	public void deveEncontrarOsTresMaioresLances() {
 		// Cenário: 3 lances em ordem crescente
-		Usuario joao = new Usuario("João");
-		Usuario jose = new Usuario("José");
-		Usuario maria = new Usuario("Maria");
-
 		Leilao leilao = new Leilao("Playstation 3 novo");
 
 		leilao.propoe(new Lance(joao, 8000.0));
@@ -168,9 +151,6 @@ public class AvaliadorTest {
 	@Test
 	public void deveDevolverTodosLancesCasoNaoHajaNoMinimo3() {
 		// Cenário: 3 lances em ordem crescente
-		Usuario joao = new Usuario("João");
-		Usuario maria = new Usuario("Maria");
-
 		Leilao leilao = new Leilao("Playstation 3 novo");
 
 		leilao.propoe(new Lance(joao, 8000.0));
