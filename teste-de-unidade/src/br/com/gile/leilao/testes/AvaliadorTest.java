@@ -29,6 +29,15 @@ public class AvaliadorTest {
 		this.maria = new Usuario("Maria");
 	}
 	
+	@Test(expected=RuntimeException.class)
+	public void naoDeveAvaliarLeiloesSemNenhumLanceDado() {
+	    Leilao leilao = new CriadorDeLeilao()
+	        .para("Playstation 3 Novo")
+	        .constroi();
+
+	    leiloeiro.avalia(leilao);
+	}
+	
 	@Test
 	public void deveEntenderLancesEmOrdemCrescente() {
 		// Cenário: 3 lances em ordem crescente
@@ -173,16 +182,4 @@ public class AvaliadorTest {
 		assertEquals(6000, maiores.get(1).getValor(), 0.00001);
 	}
 	
-	@Test
-    public void deveDevolverListaVaziaCasoNaoHajaLances() {
-        Leilao leilao = new CriadorDeLeilao()
-				.para("Playstation3 novo")
-				.constroi();
-
-        leiloeiro.avalia(leilao);
-
-        List<Lance> maiores = leiloeiro.getTresMaiores();
-
-        assertEquals(0, maiores.size());
-    }
 }
