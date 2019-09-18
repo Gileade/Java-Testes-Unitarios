@@ -52,12 +52,13 @@ public class AvaliadorTest {
 	@Test
 	public void deveCalcularAMedia() {
 		// Cenário: 3 lances em ordem crescente
-		Leilao leilao = new Leilao("Playstation 3 novo");
-
-		leilao.propoe(new Lance(joao, 300));
-		leilao.propoe(new Lance(jose, 400.0));
-		leilao.propoe(new Lance(maria, 500.0));
-
+		Leilao leilao = new CriadorDeLeilao()
+				.para("Playstation3 novo")
+				.lance(joao,300.0)
+				.lance(jose,400.0)
+				.lance(maria, 500.0)
+				.constroi();
+		
 		// executando a ação
 		leiloeiro.avalia(leilao);
 
@@ -67,24 +68,26 @@ public class AvaliadorTest {
 	@Test
 	public void testaZeroDeMedia() {
 		// Cenário: 3 lances em ordem crescente
-		Leilao leilao = new Leilao("Playstation 3 novo");
-
-		leilao.propoe(new Lance(joao, 0));
-
+		Leilao leilao = new CriadorDeLeilao()
+				.para("Playstation3 novo")
+				.lance(joao,0)
+				.constroi();
+		
 		// executando a ação
 		leiloeiro.avalia(leilao);
 
-		assertEquals(0, leiloeiro.getMedia(), 0.00001);// Deve imprimir 250
+		assertEquals(0, leiloeiro.getMedia(), 0.00001);
 
 	}
 
 	@Test
 	public void deveEntenderApenasUmLance() {
 		// Cenário: 3 lances em ordem crescente
-		Leilao leilao = new Leilao("Playstation 3 novo");
-
-		leilao.propoe(new Lance(joao, 200));
-
+		Leilao leilao = new CriadorDeLeilao()
+				.para("Playstation3 novo")
+				.lance(joao,200.0)
+				.constroi();
+		
 		// executando a ação
 		leiloeiro.avalia(leilao);
 
@@ -96,13 +99,14 @@ public class AvaliadorTest {
 	@Test
 	public void deveEntenderLancesEmOrdemAleatoria() {
 		// Cenário: 3 lances em ordem crescente
-		Leilao leilao = new Leilao("Playstation 3 novo");
-
-		leilao.propoe(new Lance(joao, 8000.0));
-		leilao.propoe(new Lance(jose, 5000.0));
-		leilao.propoe(new Lance(maria, 6800.0));
-		leilao.propoe(new Lance(jose, 9000.0));
-		leilao.propoe(new Lance(joao, 3200.0));
+		Leilao leilao = new CriadorDeLeilao()
+				.para("Playstation3 novo")
+				.lance(joao,8000.0)
+				.lance(jose,5000.0)
+				.lance(maria, 6800.0)
+				.lance(jose, 9000.0)
+				.lance(joao, 3200.0)
+				.constroi();
 
 		// executando a ação
 		leiloeiro.avalia(leilao);
@@ -114,11 +118,12 @@ public class AvaliadorTest {
 	@Test
 	public void deveEntenderLancesEmOrdemDecrescente() {
 		// Cenário: 3 lances em ordem crescente
-		Leilao leilao = new Leilao("Playstation 3 novo");
-
-		leilao.propoe(new Lance(joao, 8000.0));
-		leilao.propoe(new Lance(jose, 7000.0));
-		leilao.propoe(new Lance(maria, 6000.0));
+		Leilao leilao = new CriadorDeLeilao()
+				.para("Playstation3 novo")
+				.lance(joao,8000.0)
+				.lance(jose,7000.0)
+				.lance(maria, 6000.0)
+				.constroi();
 
 		// executando a ação
 		leiloeiro.avalia(leilao);
@@ -130,14 +135,15 @@ public class AvaliadorTest {
 	@Test
 	public void deveEncontrarOsTresMaioresLances() {
 		// Cenário: 3 lances em ordem crescente
-		Leilao leilao = new Leilao("Playstation 3 novo");
+		Leilao leilao = new CriadorDeLeilao()
+				.para("Playstation3 novo")
+				.lance(joao,8000.0)
+				.lance(jose,7000.0)
+				.lance(maria, 6000.0)
+				.lance(joao,7500.0)
+				.lance(jose,4500.0)
+				.constroi();
 
-		leilao.propoe(new Lance(joao, 8000.0));
-		leilao.propoe(new Lance(jose, 7000.0));
-		leilao.propoe(new Lance(maria, 6000.0));
-		leilao.propoe(new Lance(joao, 7500.0));
-		leilao.propoe(new Lance(jose, 4500.0));
-		
 		// executando a ação
 		leiloeiro.avalia(leilao);
 
@@ -151,16 +157,16 @@ public class AvaliadorTest {
 
 	@Test
 	public void deveDevolverTodosLancesCasoNaoHajaNoMinimo3() {
-		// Cenário: 3 lances em ordem crescente
-		Leilao leilao = new Leilao("Playstation 3 novo");
+		// Cenário: 3 lances em ordem crescente		
+		Leilao leilao = new CriadorDeLeilao()
+				.para("Playstation3 novo")
+				.lance(joao,8000.0)
+				.lance(maria, 6000.0)
+				.constroi();
 
-		leilao.propoe(new Lance(joao, 8000.0));
-		leilao.propoe(new Lance(maria, 6000.0));
-		
-		// executando a ação
-		leiloeiro.avalia(leilao);
+        leiloeiro.avalia(leilao);
 
-		List<Lance> maiores = leiloeiro.getTresMaiores();
+        List<Lance> maiores = leiloeiro.getTresMaiores();
 		
 		assertEquals(2, maiores.size());
 		assertEquals(8000, maiores.get(0).getValor(), 0.00001);
@@ -169,7 +175,9 @@ public class AvaliadorTest {
 	
 	@Test
     public void deveDevolverListaVaziaCasoNaoHajaLances() {
-        Leilao leilao = new Leilao("Playstation 3 Novo");
+        Leilao leilao = new CriadorDeLeilao()
+				.para("Playstation3 novo")
+				.constroi();
 
         leiloeiro.avalia(leilao);
 
